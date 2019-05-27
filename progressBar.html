@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+	<link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative&display=swap" rel="stylesheet">
+    <title> Progress progressBar </title>
+
+	<style>
+		body {
+			padding: 30px;
+			background-color: #f7f7f7; 
+		}
+		.main-title{
+			position: relative;
+			margin: 0 auto;
+			padding: 0px;
+			margin-top: 100px;
+			text-align: center;
+			font-family: 'Cinzel Decorative', cursive;
+			font-size: 35px;
+		}
+		.progressBar-container{
+			margin: 0 auto;
+			padding: 0px;
+			margin-top: 200px;
+			width: 500px;
+			height: 40px;
+			background-color: #ffdf00;
+			border: 1px solid;
+			border-radius: 3px;
+		}
+		.progressBar{
+			background-color: #009c3b;
+			height: 100%;
+			width: 0%;
+		}
+		
+		.progress-status{
+			float: left;
+			margin: 0 auto;
+			height: 40px;
+			width: 60px;
+			margin-top: -40px;
+			margin-left: 520px;
+			padding: 0px;
+			font-family: "Trebuchet MS", Helvetica, sans-serif;
+			font-size: 18px;
+			display: inline-block;
+		}
+		
+		.button {
+			margin: 0 auto;
+			padding: 0px;
+			margin-top: 10px;
+			margin-left: 200px;
+			width: 100px;
+			height: 40px;
+			border: 1px solid;
+			border-radius: 4px;
+			background-color: #002776;
+			border: none;
+			color: #FFFFFF;
+			text-align: center;
+			font-family: "Trebuchet MS", Helvetica, sans-serif;
+			font-size: 28px;
+			transition: all 0.5s;
+			cursor: pointer;
+		}		
+		.button span {
+			cursor: pointer;
+			display: inline-block;
+			position: relative;
+			transition: 0.5s;
+		}
+		.button span:after {
+			content: '\00bb';
+			position: absolute;
+			opacity: 0;
+			top: 0;
+			right: -20px;
+			transition: 0.5s;
+		}
+		.button:hover span {
+			padding-right: 25px;
+		}
+
+		.button:hover span:after {
+			opacity: 1;
+			right: 0;
+		}		
+    </style>	
+  </head>
+  <body>
+	
+	<!--  the '<p>' bellow will display the main title of the page-->
+	<p class="main-title">Nothing but a progress progressBar!</p>
+	
+	<!--  the 'progressBar-container' div is the progress progressBar per se. It'll be filled with the 'progressBar' -->
+    <div class="progressBar-container">
+      <!-- the 'progressBar' div will have its width increased, filling the progress progressBar -->
+	  <div class="progressBar" />
+    </div>
+	
+	<!-- the 'progress-status' is simply a numerical indicator of progress -->
+	<div class="progress-status">
+		<p id="percent"></p>
+	</div>
+    
+	<!-- the button bellow invoke the 'fillprogressBar()' function, starting the filling proccess -->
+	<button onclick='fillprogressBar(2)' class="button"> <span>Start! </span></button>
+
+	<script>
+		/*
+		Creates the 'fillprogressBar()' function that will change the 'progressBar' width.
+		The parameter will be how many seconds the filling will take to be completed
+		*/
+		function fillprogressBar(seconds){
+			//The constant 'progressBar' will store the css properties of the'progressBar' div
+			const progressBar = document.querySelector('.progressBar');
+			//The 'fillingPercentage' var will store the progress in %
+			let fillingPercentage = 0;
+			
+			
+			const interval = setInterval(() => {
+				progressBar.style.width = fillingPercentage + '%';
+				fillingPercentage++;
+				console.log(fillingPercentage, ' %');
+				if(fillingPercentage >= 100){
+					clearInterval(interval);
+				}
+				document.getElementById("percent").innerHTML = (fillingPercentage + " %");
+			},(seconds * 1000) /100)
+		}
+	</script>
+  </body>
+
+</html>
